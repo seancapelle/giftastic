@@ -1,9 +1,14 @@
+var titles = ["Star Wars", "Back to the Future", "Ghostbusters", "Indiana Jones"];
 
+for (var i = 0; i < titles.length; i++) {
 
+	var button = $('<button data-movie="titles[i]">').append(titles[i]);
+	$('#movieButtons').append(button);
+}
 
 $('button').on('click', function() {
 
-var movie = "star wars";
+var movie = $(this).data('movie');
 var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
 
 

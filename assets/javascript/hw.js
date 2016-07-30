@@ -111,12 +111,6 @@ buttonMaker = function(){
                     //Attribute active image
                     movieImage.attr("data-active", results[i].images.fixed_height_small.url);
 
-                    //Set data-state to still
-                    movieImage.attr("data-state", "still");
-
-                    //Attribute data
-                    movieImage.attr("data-value", i);
-
                     //Append the rating
                     movieDiv.append(p);
 
@@ -128,34 +122,41 @@ buttonMaker = function(){
                         
                 }
 
-            //On click to animate gifs    
-            $('img').on('click', function(e){
+            //On click to animate gifs  
 
-                //console.log(e);
+            $('img').on('click', function(e){
 
                 console.log(e);
 
-                var dataNumber = e.currentTarget.dataset.value;
+                //Set current to the current URL
+                var current = e.currentTarget.dataset.still;
 
-                var currentState = e.currentTarget.dataset.state;
+                //Set active to the active URL
+                var active = e.currentTarget.dataset.active;
 
-                var still = "still";
+                //Set still to the still URL
+                var still = e.currentTarget.dataset.still;
 
-                if ($(this).attr(data-state) == still) {
+                  if (current == still) { 
+                   
+                   //Switch to active URL
+                   $(this).attr('src', active);
 
-                    $(this).attr(src).
+                   //Set current
+                   current = active;
 
                 }
+                
                 else {
 
-                    //MAKE STILL
+                    //Switch to still URL
+                    $(this).attr('src', still);
+
+                    //Set current
+                    current = still;
                 }
-
-                var clickImage = $(this).data(movie);
-
                 
             })
-
 
             })
 

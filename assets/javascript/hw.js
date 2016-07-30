@@ -2,7 +2,7 @@
 var titles = ["Star Wars", "Back to the Future", "Ghostbusters", "Indiana Jones"];
 
 //Main function
-buttonMaker = function(){
+var buttonMaker = function(){
 
     //Create buttons from titles array
     for (var i = 0; i < titles.length; i++) {

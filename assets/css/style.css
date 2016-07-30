@@ -1,0 +1,17 @@
+body {
+	background-color: gray;
+}
+.button {
+	margin: 2px;
+}
+#movie-form {
+	margin: 10px;
+}
+p {
+	font-family: Arial, sans-serif;
+}
+img {
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px black;
+}

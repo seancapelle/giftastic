@@ -12,6 +12,9 @@ buttonMaker = function(){
 
         //Button attributes
         var button = $('<button data-movie=' + plusTitles + '>').append(titles[i]);
+
+        //Add button class
+        button.addClass('button');
         
         //Appened to div
         $('#movieButtons').append(button);
@@ -99,11 +102,20 @@ buttonMaker = function(){
                     //Create img tag    
                     var movieImage = $('<img>');
 
-                    //Attribute static image
+                    //Attribute source
                     movieImage.attr("src", results[i].images.fixed_height_small_still.url);
 
+                    //Attribute still image
+                    movieImage.attr("data-still", results[i].images.fixed_height_small_still.url);
+
+                    //Attribute active image
+                    movieImage.attr("data-active", results[i].images.fixed_height_small.url);
+
+                    //Set data-state to still
+                    movieImage.attr("data-state", "still");
+
                     //Attribute data
-                    movieImage.attr("data", i);
+                    movieImage.attr("data-value", i);
 
                     //Append the rating
                     movieDiv.append(p);
@@ -117,13 +129,31 @@ buttonMaker = function(){
                 }
 
             //On click to animate gifs    
-            $('img').on('click', function(){
+            $('img').on('click', function(e){
 
-                console.log("This is " + this);
+                //console.log(e);
+
+                console.log(e);
+
+                var dataNumber = e.currentTarget.dataset.value;
+
+                var currentState = e.currentTarget.dataset.state;
+
+                var still = "still";
+
+                if ($(this).attr(data-state) == still) {
+
+                    $(this).attr(src).
+
+                }
+                else {
+
+                    //MAKE STILL
+                }
 
                 var clickImage = $(this).data(movie);
 
-                console.log(clickImage);
+                
             })
 
 

@@ -1,62 +1,121 @@
-var titles = ["Star Wars", "Back to the Future", "Ghostbusters", "Indiana Jones"];
+var titles = ["Star+Wars", "Back+to+the+Future", "Ghostbusters", "Indiana+Jones"];
+
+buttonMaker = function(){
+
+console.log ("In buttonMaker");
 
 for (var i = 0; i < titles.length; i++) {
 
-	var button = $('<button data-movie=' +titles[i] + '>').append(titles[i]);
-	$('#movieButtons').append(button);
-}
+    var button = $('<button data-movie=' + titles[i] + '>').append(titles[i]);
+    $('#movieButtons').append(button);
+    }
 
+
+
+    $('#addMovie').on('click', function() {
+     
+     //newTitle gets the movie title user entered
+     var newTitle = $('#movie-input').val();
+
+     // //Adds newTitle to the titles array
+     titles.push(newTitle);
+
+     for (i = 0; i < titles.length; i++){
+        var button = $('<button data-movie=' +titles[i] + '>').append(titles[i]);
+        $('#movieButtons').append(button);
+
+        // var newButton = $('<button>');
+        // newButton.attr('data-movie', );
+        // newButton.html(newTitle);
+     }
+
+     //Appends new button
+     // $('#movieButtons').append(newButton);
+
+ });
+  
+//User clicks on movie button
 $('button').on('click', function() {
 
-var movie = $(this).data('movie');
-console.log (this);
-console.log ($(this));
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
+    //ID's which button selected
+    var movie = $(this).data('movie');
+    
+    //Adds movie to the queryURL
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
 
-//Ajax call
- $.ajax({
-    url: queryURL,
-    method: 'GET'
- 	})
+    //Ajax call
+     $.ajax({
+        url: queryURL,
+        method: 'GET'
+        })
 
-	//Ajax response
+    //Ajax response
     .done(function(response) {
 
-    	console.log(response);
+        //Console log object returned
+        console.log(response);
 
-    	var results = response.data;
+        //Set the response to results variable
+        var results = response.data;
 
-    	//Empty out previous gifs
-    	$('#movies').empty();
+        //Empty out previous gifs
+        $('#movies').empty();
 
-    	for (var i = 0; i < results.length; i++) {
+            //Loop to display all 10 gifs
+            for (var i = 0; i < results.length; i++) {
 
-    		var movieDiv = $('<div>');
+                //Create movieDiv
+                var movieDiv = $('<div>');
 
-    		var p = $('<p>');
+                //Create p
+                var p = $('<p>');
 
-    		var rating = results[i].rating.toUpperCase();
+                //Set rating to variable
+                var rating = results[i].rating.toUpperCase();
 
-    		//Tests if rating is given
-    		if (rating == ''){
+                    //Tests if rating is given
+                    if (rating == ''){
 
-    			p.text("Not rated");
-    		}
-    		else {
-    			p.text("Rated " + rating);
-    		}
+                        p.text("Not rated");
+                    }
+                    else {
+                        p.text("Rated " + rating);
+                    }
 
-    		var movieImage = $('<img>');
+                //Create img tag    
+                var movieImage = $('<img>');
 
-            movieImage.attr("src", results[i].images.fixed_height.url);
+                //Attribute static image
+                movieImage.attr("src", results[i].images.fixed_height_small_still.url);
 
-            movieDiv.append(p);
+                //Attribute data
+                movieImage.attr("data", i);
 
-            movieDiv.append(movieImage);
+                //Append the rating
+                movieDiv.append(p);
 
-            $('#movies').prepend(movieDiv);
-                
+                //Append movieImage to the div
+                movieDiv.append(movieImage);
+
+                //Prepend to #movies
+                $('#movies').prepend(movieDiv);
+                    
             }
 
-    	})
+            $('img').on('click', function(){
+
+                console.log("This is " + this);
+
+                var clickImage = $(this).data(i);
+
+                console.log(clickImage);
+            })
+
+
+        })
+
     });
+};
+
+buttonMaker();
+

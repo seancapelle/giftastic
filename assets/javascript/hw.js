@@ -50,7 +50,7 @@ buttonMaker = function(){
      });
   
     //User clicks on movie button
-    $('button').on('click', function() {
+    $('.button').on('click', function() {
 
         //ID's which button selected
         var movie = $(this).data('movie');

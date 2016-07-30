@@ -58,7 +58,7 @@ var buttonMaker = function(){
         console.log($(this).data('movie'));
         
         //Adds movie to the queryURL
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=dc6zaTOxFJmzC&limit=10";
 
         //Ajax call
          $.ajax({
